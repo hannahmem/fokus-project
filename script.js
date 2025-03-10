@@ -76,6 +76,12 @@ const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0) {
         beepSound.play()
         alert('Tempo finalizado!')
+        const focoAtivo = html.getAttribute('data-contexto') == 'foco'
+        // faz o broadcast de um evento -> quando esse evento estiver finalizado, algo vai ser feito
+        if (focoAtivo) {
+            const evento = new CustomEvent('FocoFinalizado')
+            document.dispatchEvent(evento)
+        }
         zerar()
         return
     }
